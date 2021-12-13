@@ -1,7 +1,6 @@
 import './App.css';
 import { useState } from 'react';
 import { Routes, Route, Link } from "react-router-dom";
-import CV from './CV.pdf'
 import anime from './anime.jpg';
 import currency from './currency.jpg';
 import dashboard2 from './dashboard-2.jpg';
@@ -43,7 +42,7 @@ function Home() {
           inspirational and entertain the people around me. I boost my energy levels with the work I do. Im passionate
           and fast learner </div>
         <div className='content'>You can read about my skills, education, experience in the resume attached below</div>
-        <div className="resume"><a href={CV}>Download Resume</a></div>
+        <div className="resume"><a href="https://docs.google.com/document/d/1NgnhREOChapb1Ooworh8i771Vcv85QeqwnVrWcxk45I/edit?usp=sharing">Download Resume</a></div>
         <div className='heading'>My works</div>
         <div className='stack-name'>Full stack applications</div>
         <div className='grouped-images'>
