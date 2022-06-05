@@ -1,10 +1,13 @@
 import './App.css';
-import { useState } from 'react';
+import { useRef } from 'react';
+import emailjs from 'emailjs-com';
 import { Routes, Route, Link } from "react-router-dom";
 import anime from './anime.jpg';
 import currency from './currency.jpg';
 import dashboard2 from './dashboard-2.jpg';
 import hack2b from './hack2-2.jpg';
+import UrlShort from './UrlShort.JPG'
+import capstone from './capstone.JPG'
 import mentor from './mentor.jpg';
 import sport from './sport.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,7 +39,8 @@ function Home() {
       </div>
       <div className='content-container'>
         <div className='heading'>About me</div>
-        <div className='content'> I design frontend and backend Web Applications. Im currently working as intern for the
+        <div className='content'> I design frontend and backend Web Applications. Im currently working as tech cell manager
+        at office of career services, IIT Hyderabad. I worked as intern for 4 months the
           startup Sabz to maintain the mobile app. Im open for the new opportunities. </div>
         <div className='content'>I prefer to keep learning, and doing challenging things. Im highly enthusiastic,
           inspirational and entertain the people around me. I boost my energy levels with the work I do. Im passionate
@@ -48,6 +52,12 @@ function Home() {
         <div className='grouped-images'>
           <a href="https://guvi-hackathon2-ranjith.netlify.app/" target="_blank" rel="noopener noreferrer">
             <img src={hack2b} alt="" />
+          </a>
+          <a href="https://capstone-ranjith.netlify.app/" target="_blank" rel="noopener noreferrer">
+            <img src={capstone} alt="" />
+          </a>
+          <a href="https://urlshortener-frontend-ranjith.netlify.app/" target="_blank" rel="noopener noreferrer">
+            <img src={UrlShort} alt="" />
           </a>
         </div>
 
@@ -107,20 +117,27 @@ function Home() {
   );
 }
 function Hello() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const alertMessage = () => {
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs.sendForm('service_gjmapmi', 'template_pun3xl9', form.current, 'tLjdp2LxoYDBtVTGC')
+    .then((result) => {
+      console.log(result.text); 
+    }, (error) => {
+        console.log(error.text);
+    });
     alert("message sent")
   }
   return (
+    <form ref={form} onSubmit={sendEmail}>
     <div className='hello-container'>
-      <input placeholder='name' value={name} onChange={(e) => setName(e.target.value)} /><br />
-      <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} /><br />
+      <input type="text" placeholder='name' name="user_name" /><br />
+      <input type="email" placeholder='email' name="user_email" /><br />
       <textarea placeholder='message: (eg.Impressed by yor portfolio *_* )'
-        value={message} onChange={(e) => setMessage(e.target.value)} />
-      <div className='hello send-message' onClick={alertMessage}>Send message</div>
+       name="message" /><br/>
+      <input type="submit" value="Send" className='hello send-message' />
     </div>
+  </form>
   )
 }
 export default App;
